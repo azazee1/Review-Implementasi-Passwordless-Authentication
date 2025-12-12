@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Login</title>
+    <meta http-equiv="refresh" content="5">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Scan QR Code</h2>
+
+    <img src="/{{ qr_path }}" width="250" style="border-radius: 12px;">
+    <p>Token: {{ token }}</p>
+
+    <iframe src="/status/{{ token }}" width="300" height="80" style="border:none;"></iframe>
+</div>
+
+</body>
+</html>

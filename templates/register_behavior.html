@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Pola Ketikan</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/behavior.js"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Daftarkan Pola Ketikan</h2>
+
+    <p>Ketik teks berikut untuk pendaftaran: <b>login verification</b></p>
+
+    <input id="regInput" type="text" 
+       onkeydown="captureKey(event)" 
+       onkeyup="calcSpeed()">
+    <br><br>
+
+    <button onclick="registerBehavior()">Simpan Pola</button>
+    <a href="/behavioral" class="btn-login">Kembali</a>
+
+<p id="result"></p>
+</div>
+
+</body>
+</html>

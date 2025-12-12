@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Login</title>
+    <style>
+        body { background:#eef; text-align:center; font-family:Arial; }
+        video { border-radius:15px; margin-top:20px; }
+        .msg { font-size:20px; margin-top:20px; }
+    </style>
+</head>
+<body>
+
+<h2>Face Recognition Login</h2>
+
+<video id="video" width="320" height="240" autoplay></video>
+<div class="msg" id="msg">Mendeteksi wajah...</div>
+
+<script>
+let video = document.getElementById("video");
+
+navigator.mediaDevices.getUserMedia({ video:true }).then(stream=>{
+    video.srcObject = stream;
+});
+
+setInterval(() => {
+    let canvas = document.createElement("canvas");
+    canvas.width = 320;
+    canvas.height = 240;
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    canvas.toBlob((blob)=>{
+        let formData = new FormData();
+        formData.append("frame", blob);
+
+        fetch("/face-login-stream", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data=>{
+            if(data.status === "success"){
+                document.getElementById("msg").innerHTML = "Wajah cocok! Login sukses.";
+                window.location.href = "/dashboard";
+            } 
+            else if(data.status === "fail") {
+                document.getElementById("msg").innerHTML = "Wajah tidak cocok.";
+            }
+            else if(data.status === "no_face"){
+                document.getElementById("msg").innerHTML = "Tidak ada wajah terdeteksi.";
+            }
+        });
+
+    }, "image/jpeg");
+}, 1000);
+</script>
+
+</body>
+</html>

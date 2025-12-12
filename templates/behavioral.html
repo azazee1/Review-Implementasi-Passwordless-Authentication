@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Behavior Verification</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/behavior.js"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>Behavioral Authentication</h2>
+
+    <p>Ketik teks berikut: <b>login verification</b></p>
+
+    <input id="behaviorInput" type="text" onkeydown="captureKey(event)" onkeyup="calcSpeed()">
+    <br><br>
+
+    <button onclick="verifyBehavior()">Verifikasi</button>
+    <button onclick="window.location='/register-behavior'">Daftar Pola</button>
+
+    <p id="result"></p>
+</div>
+
+</body>
+</html>
+
